@@ -3,8 +3,8 @@ import java.util.*;
 
 public class UsersApp {
     public static void main(String[] args) {
-        ArrayList<User> users = new ArrayList<>();
 
+        ArrayList<User> users = new ArrayList<>();
 
         try {
             File inputFile = new File("users.txt");
