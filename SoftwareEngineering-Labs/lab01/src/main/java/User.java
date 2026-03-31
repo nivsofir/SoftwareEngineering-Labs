@@ -1,22 +1,22 @@
 
 public class User {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public User(String username, String password) {
-        if (username == null || !isValidEmail(username)) {
+        if (username==null || !isValidEmail(username)) {
             throw new IllegalArgumentException("Please enter a valid Email as username");
         }
 
-        if (username.length() > 50) {
+        if (username.length()>50) {
             throw new IllegalArgumentException("Username is too long, try something shorter");
         }
 
-        if (password == null || password.length() < 8) {
+        if (password == null || password.length()<8) {
             throw new IllegalArgumentException("Your password is too short, add more characters");
         }
 
-        if (password.length() > 12) {
+        if (password.length()>12) {
             throw new IllegalArgumentException("Your password is too long, try a shorter one");
         }
 
@@ -46,7 +46,7 @@ public class User {
         boolean hasDigit = false;
         boolean hasSymbol = false;
 
-        String allowedSymbols = "!@#$%^&*()_+";
+        String allowedSymbols = "~!@#$%^&*()_+";
 
         for (int i = 0; i < password.length(); i++) {
             char ch = password.charAt(i);
