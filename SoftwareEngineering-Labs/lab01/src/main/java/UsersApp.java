@@ -1,7 +1,27 @@
+/**
+ * The UsersApp class is the main class of the program.
+ * It reads user data from the input file, validates each user,
+ * stores only valid users, sorts them by username,
+ * and writes the valid users to the output file.
+ * Invalid users are printed to the console together with
+ * the corresponding error message.
+ */
 import java.io.*;
 import java.util.*;
 
+
 public class UsersApp {
+    /**
+     * The main method of the program.
+     * It reads lines from the input file "users.txt".
+     * Each line contains a username and password.
+     * For each line:
+     * - A User object is created if the data is valid
+     * - Invalid input is reported to the console
+     * After reading all lines:
+     * - The valid users are sorted by username
+     * - The sorted users are written to "out.txt"
+     */
     public static void main(String[] args) {
 
         ArrayList<User> users = new ArrayList<>();
