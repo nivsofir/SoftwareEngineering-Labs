@@ -71,7 +71,7 @@ public class User {
 
         return hasLetter && hasDigit && hasSymbol;
     }
-// * Returns a string representation of the user. The format is: username + space + password
+//  Returns a string representation of the user. The format is: username + space + password
     @Override
     public String toString() {
         return username + " " + password;
