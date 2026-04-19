@@ -9,7 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**
+ * Controller class for the login screen.
+ * Handles user input and checks if the entered username and password
+ * match one of the valid users loaded into the system.
+ */
 public class LoginController {
 
     @FXML
@@ -21,6 +25,12 @@ public class LoginController {
     @FXML
     private Label messageLabel;
 
+    /**
+     * Handles the login button click.
+     * If the username and password match an existing user,
+     * the screen changes to the welcome screen.
+     * Otherwise, an error message is shown on the login screen.
+     */
     @FXML
     void handleLogin(ActionEvent event) throws IOException {
         String username = usernameField.getText().trim();
