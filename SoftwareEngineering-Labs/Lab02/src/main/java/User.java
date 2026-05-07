@@ -6,9 +6,9 @@
 public class User {
     private final String username;
     private final String password;
+    private int failedAttempts;
+    private long blockedUntil;
 
-
-   // Creates a new user after validating the username and password.
     public User(String username, String password) {
         if (username == null || !isValidEmail(username)) {
             throw new IllegalArgumentException("Please enter a valid Email as username");
@@ -32,25 +32,51 @@ public class User {
 
         this.username = username;
         this.password = password;
+        this.failedAttempts = 0;
+        this.blockedUntil = 0;
     }
-    //Returns the username of the user.
+
     public String getUsername() {
         return username;
     }
 
-    //Returns the password of the user.
     public String getPassword() {
         return password;
     }
 
-    // Checks whether the given email is valid.
+    public synchronized int getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public synchronized void incrementFailedAttempts() {
+        failedAttempts++;
+    }
+
+    public synchronized void resetFailedAttempts() {
+        failedAttempts = 0;
+    }
+
+    public synchronized void blockForSeconds(int seconds) {
+        blockedUntil = System.currentTimeMillis() + seconds * 1000L;
+    }
+
+    public synchronized boolean isBlocked() {
+        return System.currentTimeMillis() < blockedUntil;
+    }
+
+    public synchronized long getRemainingBlockedSeconds() {
+        long remainingMillis = blockedUntil - System.currentTimeMillis();
+        if (remainingMillis <= 0) {
+            return 0;
+        }
+        return (remainingMillis + 999) / 1000;
+    }
+
     private boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9][A-Za-z0-9.\\-]*\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
     }
 
-
-    // Checks whether the password is valid.
     private boolean isValidPassword(String password) {
         boolean hasLetter = false;
         boolean hasDigit = false;
@@ -74,7 +100,7 @@ public class User {
 
         return hasLetter && hasDigit && hasSymbol;
     }
-    //Returns the user information as a string.
+
     @Override
     public String toString() {
         return username + " " + password;
